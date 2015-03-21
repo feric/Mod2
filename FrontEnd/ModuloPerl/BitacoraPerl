@@ -1,0 +1,6 @@
+Bitacora 
+
+perl -MCPAN -e 'install JSON'
+apt-get install libjson-pp-perl
+apt-get install libwww-perl
+
