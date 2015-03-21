@@ -1,9 +1,9 @@
 #!/usr/bin/perl -w
+# Obteniendo una cadena JSON 
 use strict;
 use LWP::UserAgent;
 print "Content-type:text/html\r\n\r\n";
 my $ua = LWP::UserAgent->new;
-#my $server_endpoint = "http://www.google.com/";
 my $server_endpoint = "http://jsonplaceholder.typicode.com/posts";
 # set custom HTTP request header fields
 my $req = HTTP::Request->new(GET => $server_endpoint);
