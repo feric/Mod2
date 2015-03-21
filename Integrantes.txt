@@ -1,0 +1,4 @@
+Eric Castañeda -> ecastaneda@bec... -> Módulo Perl   -- Front-End
+Eduardo Lagos -> elagos@bec....     -> Módulo Drupal -- Back-End
+Isaac Rugerio -> irugerio@bec....   -> Módulo Drupal -- Back-End
+Angel Reyes   -> areyes@bec....	    -> Módulo C#     -- Cliente
