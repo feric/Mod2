@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>untitled</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="generator" content="Geany 1.24.1" />
+</head>
+
+<body>
+	<h1>Prueba del modulo Web Service en PERL</h1>
+	<h4>Elige una de las fuentes para obtener sus datos en formato JSON </h4>
+	<form action="./hello_post.pl" method="POST">
+		<label>Fuente JSON</label><br />
+		<select name="numero">
+			<option value="1">http://jsonplaceholder.typicode.com/posts</option>
+			<option value="2">http://jsonplaceholder.typicode.com/users</option>
+			<option value="3">http://jsonplaceholder.typicode.com/comments</option>
+		</select>
+<!--
+	Fuente JSON: <input type="text" name="numero">  <br>
+-->
+	<input type="submit" value="Submit">
+	</form>	
+</body>
+
+</html>
