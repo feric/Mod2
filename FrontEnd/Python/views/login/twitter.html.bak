@@ -1,0 +1,10 @@
+{{extend 'layout.html'}}
+<html>
+    <head>
+        <title>Access Restricted</title>
+    </head>
+    <body>
+        <h1>Autenticacion en Twitter</h1>
+        {{=form}}
+    </body>
+</html>

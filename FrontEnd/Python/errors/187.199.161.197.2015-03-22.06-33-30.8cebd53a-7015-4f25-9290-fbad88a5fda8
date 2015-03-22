@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.AttributeError'> 'FORM' object has no attribute 'errores'"
+p3
+sS'layer'
+p4
+S'/root/web2py/applications/Saludos/controllers/login.py'
+p5
+sS'code'
+p6
+S"def index():\n    formulario = FORM('Usuario', INPUT(_name='usuario', requires=IS_NOT_EMPTY()),\n                      'Password',INPUT(_name='pass',_type='password', requires=IS_NOT_EMPTY()),\n                      INPUT(_type='submit',_value='Log in'))\n    if formulario.process().accepted:\n        session.flash= 'okas'\n        redirect(URL('adentro'))\n    elif formulario.process().errores:\n        response.flash = 'Formulario tiene errores'\n    else:\n        response.flash = 'por favor complete el formulario'\n    return dict(form=formulario)\n\ndef adentro():\n    return dict()\n\nresponse._vars=response._caller(index)\n"
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/root/web2py/gluon/restricted.py", line 224, in restricted\n    exec ccode in environment\n  File "/root/web2py/applications/Saludos/controllers/login.py", line 17, in <module>\n  File "/root/web2py/gluon/globals.py", line 393, in <lambda>\n    self._caller = lambda f: f()\n  File "/root/web2py/applications/Saludos/controllers/login.py", line 8, in index\n    elif formulario.process().errores:\nAttributeError: \'FORM\' object has no attribute \'errores\'\n'
+p11
+s.

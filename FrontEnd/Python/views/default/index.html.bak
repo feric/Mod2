@@ -1,0 +1,10 @@
+<html>
+    <head>
+        <title>Vista de Saludos</title>
+    </head>
+    <body>
+        <h1>Esto es una lista con limite:{{=message}} </h1>
+        {{respuesta = message
+        for i in range(respuesta):}}<h3>{{=i}}</h3>{{pass}}
+     </body>
+</html>

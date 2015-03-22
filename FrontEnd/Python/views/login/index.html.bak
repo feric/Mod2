@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+<html>
+    <head>
+        <title>Access Restricted</title>
+    </head>
+    <body>
+        <table>
+            <tr>  
+                <td>
+                    <a href="twitter/">
+                        <img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/twitter_circle_color-512.png" width=300 height=300></img>
+                    </a>
+                </td>
+                <td>
+                    <a href="facebook/">
+                        <img src="http://lolopeakbrewery.com/wp-content/uploads/2014/11/facebook-logo.jpg" width=200 height=250></img>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
