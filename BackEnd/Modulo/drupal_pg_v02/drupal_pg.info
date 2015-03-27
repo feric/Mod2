@@ -1,0 +1,5 @@
+name = drupal_pg
+description = "Modulo para transmitir el contenido de drupal al front end"
+package = Drupal_pg elagos
+core = 7.x
+
