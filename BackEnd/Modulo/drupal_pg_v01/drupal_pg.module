@@ -1,0 +1,82 @@
+<?php
+/**
+ * Autor: Lagos Flores Eduardo 
+ * elagos@bec.seguridad.unam.mx
+ */	
+	
+function drupal_pg_menu(){
+
+	$items['drupal_pg/elemento'] = array(
+        	'title' => 'Datos_Nodo',
+             	'page callback' => 'drupal_pg_elemento',
+                'access callback' => TRUE,
+        );
+	$items['drupal_pg/lista'] = array(
+                'title' => 'Datos_Lista',
+                'page callback' => 'drupal_pg_lista',
+                'access callback' => TRUE,
+        );
+	return $items;
+}
+
+function drupal_pg_elemento(){
+	#if(isset($_POST['nid'])){	$nid = $_POST['nid'];
+	$nid = 2;
+	
+	// se carga el nodo
+	$node = node_load($nid);
+	
+	$title = $node->title;
+	$body = field_get_items('node',$node,'body');
+	$body_value = $body[0]['value'];
+
+	$img = field_get_items('node',$node,'field_image');
+        $filename = $img[0]['filename'];
+
+	$date = format_date($node->created, 'custom', 'D j M Y');
+	
+	$prueba = field_get_items('node',$node,'node');
+        #$body_value = $body[0]['value'];
+	
+	$dir_img = '/var/www/drupalsite/sites/default/files/field/image/'.$filename;
+	
+	$hash = array(
+		'nid' => $nid,
+		'title' => $title,
+		'body' => $body_value,
+		'dir_imagen' => $dir_img,
+		'date_created' => $date,
+		#'prueba' => $prueba,
+	);
+
+	#print($title);
+	#print($contenido);
+	echo json_encode($hash);
+	#}
+}
+
+
+
+function drupal_pg_lista(){
+        #if(isset($_POST['list'])){      $nid = $_POST['nid'];
+        #$nid = 2;
+
+        // se carga el nodo
+	$publicaciones = array();
+  	for($i = 1; $i <= 3; $i++){
+		$nid = $i;
+        	$node = node_load($nid);
+        	$title = $node->title;
+        	$date = format_date($node->created, 'custom', 'D j M Y');
+
+       		#$body_value = $body[0]['value'];
+
+        	$publicaciones[$nid] = array(
+                	#'nid' => $nid,
+                	'title' => $title,
+                	'date_created' => $date,
+        	);
+  	}
+  	echo json_encode($publicaciones);
+	#}
+}

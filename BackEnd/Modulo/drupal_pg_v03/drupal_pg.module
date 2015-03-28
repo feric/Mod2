@@ -1,0 +1,194 @@
+<?php
+include_once('Nodo.php');
+/**
+ * Autor: Lagos Flores Eduardo 
+ * elagos@bec.seguridad.unam.mx
+ *
+ **/	
+	
+function drupal_pg_menu(){
+
+	$items['drupal_pg/elementos'] = array(
+        	'title' => 'Datos_Elemento',
+             	'page callback' => 'drupal_pg_elementos',
+                'access callback' => TRUE,
+        );
+	$items['drupal_pg/lista'] = array(
+                'title' => 'Datos_Lista',
+                'page callback' => 'drupal_pg_lista',
+                'access callback' => TRUE,
+        );
+	$items['drupal_pg/nodo'] = array(
+                'title' => 'Datos_Nodo',
+                'page callback' => 'drupal_pg_nodo',
+                'access callback' => TRUE,
+        );
+	$items['drupal_pg/nodopoo'] = array(
+                'title' => 'Datos_NodoPOO',
+                'page callback' => 'drupal_pg_nodopoo',
+                'access callback' => TRUE,
+        );
+	$items['drupal_pg/elementospoo'] = array(
+                'title' => 'Datos_ElementoPOO',
+                'page callback' => 'drupal_pg_elementospoo',
+                'access callback' => TRUE,
+        );
+	
+	return $items;
+}
+
+// funcion que lista todos los elementos
+function drupal_pg_elementos(){
+    if(isset($_POST['index'])){	
+	$index = (int)$_POST['index'];
+	if($index == 1){
+		
+		$elementos = array();
+		for($j = 1; $j <= 50; $j++){	
+			// se carga el nodo
+			$nid = $j;
+			$node = node_load($nid);
+			if($node != null){	
+			$title = $node->title;
+			$body = field_get_items('node',$node,'body');
+			$body_value = $body[0]['value'];
+			$img = field_get_items('node',$node,'field_image');
+        		$filename = $img[0]['filename'];
+			$date = format_date($node->created, 'custom', 'D j M Y');
+			//$dir_img = '/var/www/drupalsite/sites/default/files/field/image/'.$filename;
+			$dir_img ='http://45.55.135.205/drupal/sites/default/files/styles/large/public/field/image/'.$filename;
+			#$prueba = field_get_items('node',$node,'node');
+			$elementos[$nid] = array(
+				'nid' => $nid,
+				'title' => $title,
+				'body' => $body_value,
+				'dir_imagen' => $dir_img,
+				'date_created' => $date,
+				#'prueba' => $prueba,
+			);
+		    }
+		    else{
+			$j=50;	
+		    }
+		}
+		echo json_encode($elementos);
+	
+	}
+	else{
+		echo "Ya casi le atinas compa!!! XD  notes bad!";
+	}
+    }
+    else{
+	echo "Bad bad bad!!! D: petición fea compa!";
+    }
+}
+
+//------------------ función que lista todos los nodos
+function drupal_pg_lista(){
+	$publicaciones = array();
+  	for($i = 1; $i <= 7; $i++){
+		$nid = $i;
+        	$node = node_load($nid);
+        	$title = $node->title;
+        	
+		$body = field_get_items('node',$node,'body');
+	        $body_value = $body[0]['value'];
+
+        	$img = field_get_items('node',$node,'field_image');
+        	$filename = $img[0]['filename'];
+
+        	$dir_img = '/var/www/drupalsite/sites/default/files/field/image/'.$filename;
+		$date = format_date($node->created, 'custom', 'D j M Y');
+
+        	$publicaciones[$nid] = array(
+                	#'nid' => $nid,
+                	'title' => $title,
+                	'body' => $body_value,
+        	        'dir_imagen' => $dir_img,
+	                'date_created' => $date,
+        	);
+  	}
+  	echo json_encode($publicaciones);
+}
+
+//------------------ función que lista los datos de un nodo
+function drupal_pg_nodo(){
+        
+	if(isset($_POST['id'])){      
+		$nid = (int)$_POST['id'];        	
+		if($nid > 0){
+        		// se carga el nodo
+                	$node = node_load($nid);
+			if($node != null){
+                		$title = $node->title;
+                		$body = field_get_items('node',$node,'body');
+                		$body_value = $body[0]['value'];
+                		$img = field_get_items('node',$node,'field_image');
+               			$filename = $img[0]['filename'];
+                		$dir_img = '/var/www/drupalsite/sites/default/files/field/image/'.$filename;
+                		$date = format_date($node->created, 'custom', 'D j M Y');
+                		
+				$datos_nodo = array(
+                        		'nid' => $nid,
+                        		'title' => $title,
+                        		'body' => $body_value,
+                        		'dir_imagen' => $dir_img,
+                       			'date_created' => $date,
+               			);
+        			echo json_encode($datos_nodo);
+        		}
+			else{
+				echo "Esa nota aun no se escribe compa! pon una que YA EXISTA! XD ";
+			}
+		}
+		else{
+			echo "Id inconrrecto XD !! Esa nota nunca se pudo escribir!";
+		}
+	}
+	else{
+		echo "Nada que mostrar!!, No eliges nada padre santo! D:";
+	}
+}
+
+/* +---------------------------------------------------------------------------------------------------+
+				Funciones implementadas con POO
+   +---------------------------------------------------------------------------------------------------+ */
+// funcion que lista los datos de un nodo. POO 
+
+function drupal_pg_nodopoo(){
+        if(isset($_POST['id'])){
+                $nid = (int)$_POST['id'];
+                if($nid > 0){
+				$aux = new Nodo();
+				$aux->getNode($nid); 
+				
+                        }
+                        else{
+                                echo "Esa nota aun no se escribe compa! pon una que YA EXISTA! XD ";
+                        }
+                }
+                else{
+                        echo "Id inconrrecto XD !! Esa nota nunca se pudo escribir!";
+                }
+}
+
+
+// funcion que muestra todos los datos de todos los nodos
+
+ function drupal_pg_elementospoo(){
+    if(isset($_POST['index'])){
+        $index = (int)$_POST['index'];
+        if($index == 1){
+		$aux = new Nodo();
+		$aux->getAll($index);
+        }
+	else{
+		echo "Ese index se pasa de lanza, atinale al correcto compa! XD";
+	}
+    }
+    else{
+    	echo "Que pasó compa! No me quieras chamaquear con esa peticion, esta bien eriza!! XD ";
+    }
+ }
+
+ 
